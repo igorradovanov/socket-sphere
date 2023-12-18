@@ -12,7 +12,7 @@ This is a real-time chat application built with Express.js and Socket.IO.
 
 ## 🛠️ Setup 🛠️
 
-1. Clone this repository: `git clone https://github.com/igorradoanov/socket-sphere.git`
+1. Clone this repository: `git clone https://github.com/igorradovanov/socket-sphere.git`
 2. Navigate into the directory: `cd socket-sphere`
 3. Install dependencies: `npm install`
 4. Start the server: `npm start`
