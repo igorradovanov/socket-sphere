@@ -10,6 +10,7 @@ const __dirname = path.dirname(__filename);
 const env = process.env.NODE_ENV || 'development';
 
 const PORT = process.env.PORT || 3500;
+const ADMIN = "Admin";
 
 const app = express();
 
@@ -23,9 +24,19 @@ const httpServer = app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
 
+// State / Temporary  storage
+// TODO: Replace with database
+
+const userstState = {
+  users: [],
+  setUsers: function (newUsersArray) {
+    this.users = newUsersArray;
+  },
+};
+
+
 const io = new Server(httpServer);
 
 chatSocket(io);
 
 export { app };
- 
