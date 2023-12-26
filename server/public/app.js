@@ -64,6 +64,8 @@ socket.on('message', (data) => {
         li.innerHTML = `<div class="post__text">${text}</div>`;
     }
     document.querySelector('.chat-display').appendChild(li);
+
+    chatDisplay.scrollTop = chatDisplay.scrollHeight;
 });
 
 let activityTimeout;
@@ -75,5 +77,19 @@ socket.on('activity', (name) => {
         activity.textContent = '';
     }, 1000);
 });
+
+
+function showUsers(users) {
+    usersList.textContent = '';
+    if (users) {
+        usersList.innerHTML = `<em>Users in room: ${chatRoom.value}</em>`;
+        users.forEach(user, i => {
+            usersList.textContent += ` ${user.name}`;
+            if (users.length > 1 && i !== users.length - 1) {
+                usersList.textContent += ',';
+            }
+        });
+    }
+}
 
 setupEventListener();
