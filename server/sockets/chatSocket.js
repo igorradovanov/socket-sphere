@@ -95,7 +95,10 @@ const chatSocket = io => {
 
         // On activity
         socket.on('activity', (name) => {
-            socket.broadcast.emit('activity', name);
+            const room = getUser(socket.id)?.room;
+            if (room) {
+                socket.broadcast.to(room).emit('activity', name);
+            }
         });
     });
 }
