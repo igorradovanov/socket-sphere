@@ -6,12 +6,16 @@ import helmet from 'helmet';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const env = process.env.NODE_ENV || 'development';
 
 const PORT = process.env.PORT || 3500;
 
 const app = express();
 
+if (env != 'production') {
 app.use(helmet()); // Apply helmet middleware for enhanced security
+}
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 const httpServer = app.listen(PORT, () => {
