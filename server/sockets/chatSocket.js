@@ -1,3 +1,8 @@
+/**
+ * Initializes the chat socket functionality.
+ * 
+ * @param {SocketIO.Server} io - The Socket.IO server instance.
+ */
 const chatSocket = io => {
     io.on('connection', socket => {
         // Initial
@@ -23,7 +28,6 @@ const chatSocket = io => {
 
         // On message received
         socket.on('message', (data) => {
-            console.log(data);
             io.emit('message', `${socket.id.substring(0, 5)}: ${data}`);
         });
 
