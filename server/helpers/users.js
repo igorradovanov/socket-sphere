@@ -72,3 +72,5 @@ class User {
         return Array.from(new Set(this.userState.users.map(user => user.room)))
     }
 }
+
+export { User };

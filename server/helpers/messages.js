@@ -7,3 +7,5 @@ function buildMsg(name, text) {
         time: Date.now()
     }
 }
+
+export { buildMsg };
