@@ -43,6 +43,14 @@ msgInput.addEventListener('keypress', () => {
     socket.emit('activity', nameInput.value);
 });
 
+// Listen for user list
+
+socket.on('userList', ({ users }) => { showUsers(users) });
+
+// Listen for room list
+
+socket.on('roomList', ({ rooms }) => { showRooms(users) });
+
 // Listen for messages 
 
 socket.on('message', (data) => {
