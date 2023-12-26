@@ -1,11 +1,18 @@
 const socket = io('ws://localhost:3500');
 
-const activity = document.querySelector('#activity');
-const msgInput = document.querySelector('#message');
+// LEGACY MOCK UI, DO NOT USE
 
-export function sendMessage(e){
+const msgInput = document.querySelector('#message');
+const nameInput = document.querySelector('#name');
+const chatRoom = document.querySelector('#room');
+const activity = document.querySelector('#activity');
+const usersList = document.querySelector('#user-list');
+const roomList = document.querySelector('#room-list');
+const chatDisplay = document.querySelector('#chat-display');
+
+export function sendMessage(e) {
     e.preventDefault();
-    if(msgInput.value){
+    if (msgInput.value) {
         socket.emit('message', msgInput.value);
         msgInput.value = '';
     };
@@ -14,7 +21,7 @@ export function sendMessage(e){
 
 export function setupEventListener() {
     document.querySelector('form').addEventListener('submit', sendMessage);
-  }
+}
 
 // Listen for messages 
 
