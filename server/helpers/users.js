@@ -20,7 +20,7 @@ class User {
      * @property {Array} users - The array of users.
      * @property {Function} setUsers - Sets the users array.
      */
-    userstState = {
+    userState = {
         users: [],
         setUsers: function (newUsersArray) {
             this.users = newUsersArray;
@@ -36,14 +36,14 @@ class User {
             name: this.name,
             room: this.room
         }
-        this.userstState.setUsers([...this.userstState.users.filter(user => user.id !== this.id), user])
+        this.userState.setUsers([...this.userState.users.filter(user => user.id !== this.id), user])
     }
 
     /**
      * Deactivates the user by removing them from the users array.
      */
     deactivateUser() {
-        this.userstState.setUsers(this.userstState.users.filter(user => user.id !== this.id))
+        this.userState.setUsers(this.userState.users.filter(user => user.id !== this.id))
     }
 
     /**
@@ -52,7 +52,7 @@ class User {
      * @returns {Object} - The user object.
      */
     getUser(id) {
-        return this.userstState.users.find(user => user.id === id)
+        return this.userState.users.find(user => user.id === id)
     }
 
     /**
@@ -61,7 +61,7 @@ class User {
      * @returns {Array} - An array of users in the specified room.
      */
     getUsersInRoom(room) {
-        return this.userstState.users.filter(user => user.room === room)
+        return this.userState.users.filter(user => user.room === room)
     }
 
     /**
@@ -69,6 +69,6 @@ class User {
      * @returns {Array} - An array of all active rooms.
      */
     getAllActiveRooms() {
-        return Array.from(new Set(this.userstState.users.map(user => user.room)))
+        return Array.from(new Set(this.userState.users.map(user => user.room)))
     }
 }
