@@ -43,7 +43,6 @@ ul {
     padding: 0;
     margin: 10px;
     overflow-y: auto;
-    flex: 1;
 }
 
 li {
@@ -58,5 +57,6 @@ li {
 
 li:nth-child(odd) {
     background-color: #ddd;
+    color:#303030 ;
     align-self: flex-start;
 }
