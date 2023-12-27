@@ -11,8 +11,8 @@ const chatSocket = io => {
         // Initial
         console.log(`User connected: ${socket.id}`);
 
-        // Create User instance
-        const user = new User();
+        // Initialize User instance
+        let user;
 
         // On connection to user
         socket.emit('message', buildMsg('Admin', 'Welcome to the Sphere Chat! 💬'));
@@ -21,14 +21,16 @@ const chatSocket = io => {
 
             // Leave previous room
 
-            const prevRoom = user.getUser(socket.id)?.room;
+            user = new User(socket.id, name, room);
+
+            const prevRoom = user.getUser()?.room;
 
             if (prevRoom) {
                 socket.leave(prevRoom);
                 io.to(prevRoom).emit('message', buildMsg('Admin', `${name} has left the chat`));
             }
 
-            user.activateUser(socket.id, name, room);
+            user.activateUser();
 
             // Cannot updated previous room users list until after the state is updated
 
@@ -65,8 +67,6 @@ const chatSocket = io => {
 
         // On user disconnect
         socket.on('disconnect', () => {
-            user.getUser(socket.id);
-
             if (user) {
                 io.to(user.room).emit('message', buildMsg('Admin', `${user.name} has left the room`));
             }
@@ -84,8 +84,7 @@ const chatSocket = io => {
 
         // On message received
         socket.on('message', ({ name, text }) => {
-            console.log('message received')
-            const room = user.getUser(socket.id)?.room;
+            const room = user.getUser()?.room;
             if (room) {
                 io.to(room).emit('message', buildMsg(name, text));
             }
@@ -93,11 +92,12 @@ const chatSocket = io => {
 
         // On activity detected
         socket.on('activity', (name) => {
-            const room = user.getUser(socket.id)?.room;
+            const room = user.getUser()?.room;
             if (room) {
                 socket.broadcast.to(room).emit('activity', name);
             }
         });
+
     });
 }
 

@@ -51,8 +51,8 @@ class User {
      * @param {string} id - The ID of the user to retrieve.
      * @returns {Object} - The user object.
      */
-    getUser(id) {
-        return this.userState.users.find(user => user.id === id)
+    getUser() {
+        return this.userState.users.find(user => user.id === this.id)
     }
 
     /**

@@ -12,7 +12,6 @@ const chatDisplay = document.querySelector('#chat-display');
 
 export function sendMessage(e) {
     e.preventDefault();
-    console.log('sending message')
     if (msgInput.value && nameInput.value && chatRoom.value) {
         socket.emit('message', {
             name: nameInput.value,
@@ -87,13 +86,10 @@ socket.on('activity', (name) => {
 
 
 function showUsers(users) {
-    console.log('showing users')
-    console.log(users)
     usersList.textContent = '';
     if (users) {
         usersList.innerHTML = `<em>Users in room: ${chatRoom.value}</em>`;
         users.forEach((currentUser, i) => {
-            console.log(currentUser)
             usersList.textContent += ` ${currentUser.name}`;
             if (users.length > 1 && i !== users.length - 1) {
                 usersList.textContent += ',';
@@ -104,11 +100,9 @@ function showUsers(users) {
 
 function showRooms(rooms) {
     roomList.textContent = '';
-    console.log('roomList', rooms)
     if (rooms) {
         roomList.innerHTML = '<em>Active Rooms:</em>';
         rooms.forEach((currentRoom, i) => {
-            console.log('currentRoom', currentRoom, rooms)
             roomList.textContent += ` ${currentRoom}`;
             if (rooms.length > 1 && i !== rooms.length - 1) {
                 roomList.textContent += ',';
