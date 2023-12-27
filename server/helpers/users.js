@@ -8,24 +8,12 @@ class User {
      * @param {string} name - The user's name.
      * @param {string} room - The room the user is in.
      */
-    constructor(id, name, room) {
+    constructor(id, name, room, userState) {
         this.id = id;
         this.name = name;
         this.room = room;
+        this.userState = userState;
     }
-
-    /**
-     * Represents the state of users.
-     * @type {Object}
-     * @property {Array} users - The array of users.
-     * @property {Function} setUsers - Sets the users array.
-     */
-    userState = {
-        users: [],
-        setUsers: function (newUsersArray) {
-            this.users = newUsersArray;
-        },
-    };
 
     /**
      * Activates the user by adding them to the users array.
@@ -37,6 +25,7 @@ class User {
             room: this.room
         }
         this.userState.setUsers([...this.userState.users.filter(user => user.id !== this.id), user])
+        console.log(this.userState.users)
     }
 
     /**

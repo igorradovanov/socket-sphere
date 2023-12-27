@@ -8,6 +8,19 @@ import { buildMsg } from "../helpers/messages.js";
  */
 const chatSocket = io => {
 
+    /**
+     * Represents the state of users.
+     * @type {Object}
+     * @property {Array} users - The array of users.
+     * @property {Function} setUsers - Sets the users array.
+     */
+    let userState = {
+        users: [],
+        setUsers: function (newUsersArray) {
+            this.users = newUsersArray;
+        },
+    };
+
     // Initialize User instance
     let user;
 
@@ -22,10 +35,10 @@ const chatSocket = io => {
 
             // Leave previous room
 
-            user = new User(socket.id, name, room);
+            user = new User(socket.id, name, room, userState);
 
             const prevRoom = user.getUser()?.room;
-
+            
             if (prevRoom) {
                 socket.leave(prevRoom);
                 io.to(prevRoom).emit('message', buildMsg('Admin', `${name} has left the chat`));
