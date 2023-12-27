@@ -4,7 +4,7 @@ function buildMsg(name, text) {
     return {
         name,
         text,
-        time: Date.now()
+        time: new Date().toLocaleDateString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }),
     }
 }
 
