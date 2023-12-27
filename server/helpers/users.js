@@ -48,7 +48,6 @@ class User {
 
     /**
      * Gets a user by their ID.
-     * @param {string} id - The ID of the user to retrieve.
      * @returns {Object} - The user object.
      */
     getUser() {

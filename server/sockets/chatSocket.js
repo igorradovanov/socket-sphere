@@ -70,17 +70,17 @@ const chatSocket = io => {
         socket.on('disconnect', () => {
             if (user) {
                 io.to(user.room).emit('message', buildMsg('Admin', `${user.name} has left the room`));
+
+                io.to(user.room).emit('userList', {
+                    users: user.getUsersInRoom(user.room),
+                })
+
+                io.emit('roomList', {
+                    rooms: user.getAllActiveRooms(),
+                })
+
+                console.log(`User disconnected: ${socket.id}`)
             }
-
-            io.to(user.room).emit('userList', {
-                users: user.getUsersInRoom(user.room),
-            })
-
-            io.emit('roomList', {
-                rooms: user.getAllActiveRooms(),
-            })
-
-            console.log(`User disconnected: ${socket.id}`)
         });
 
         // On message received

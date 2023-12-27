@@ -88,8 +88,9 @@ socket.on('activity', (name) => {
 function showUsers(users) {
     usersList.textContent = '';
     if (users) {
-        usersList.innerHTML = `<em>Users in room: ${chatRoom.value}</em>`;
+        usersList.innerHTML = `<em>Users in room:</em>`;
         users.forEach((currentUser, i) => {
+            console.log(users)
             usersList.textContent += ` ${currentUser.name}`;
             if (users.length > 1 && i !== users.length - 1) {
                 usersList.textContent += ',';
