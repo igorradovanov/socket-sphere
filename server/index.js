@@ -11,7 +11,6 @@ const __dirname = path.dirname(__filename);
 const env = process.env.NODE_ENV || 'development';
 
 const PORT = process.env.PORT || 3500;
-const ADMIN = "Admin";
 
 const app = express();
 
@@ -24,7 +23,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 const httpServer = app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
-
 
 const io = new Server(httpServer);
 
