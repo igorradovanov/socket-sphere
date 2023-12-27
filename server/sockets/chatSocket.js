@@ -7,12 +7,13 @@ import { buildMsg } from "../helpers/messages.js";
  * @param {SocketIO.Server} io - The Socket.IO server instance.
  */
 const chatSocket = io => {
+
+    // Initialize User instance
+    let user;
+
     io.on('connection', socket => {
         // Initial
         console.log(`User connected: ${socket.id}`);
-
-        // Initialize User instance
-        let user;
 
         // On connection to user
         socket.emit('message', buildMsg('Admin', 'Welcome to the Sphere Chat! 💬'));
