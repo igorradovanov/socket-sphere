@@ -1,6 +1,12 @@
 //Helper message functions
 
-function buildMsg(name, text) {
+interface Message {
+    name: string,
+    text: string,
+    time: string,
+}
+
+function buildMsg(name: string, text: string): Message {
     return {
         name,
         text,

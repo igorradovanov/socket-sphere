@@ -38,7 +38,7 @@ const chatSocket = io => {
             user = new User(socket.id, name, room, userState);
 
             const prevRoom = user.getUser()?.room;
-            
+
             if (prevRoom) {
                 socket.leave(prevRoom);
                 io.to(prevRoom).emit('message', buildMsg('Admin', `${name} has left the chat`));
