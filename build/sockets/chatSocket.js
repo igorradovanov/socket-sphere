@@ -1,8 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.chatSocket = void 0;
-var users_js_1 = require("../helpers/users.js");
-var messages_js_1 = require("../helpers/messages.js");
+import { User } from "../helpers/users.js";
+import { buildMsg } from "../helpers/messages.js";
 /**
  * Initializes the chat socket functionality.
  *
@@ -27,16 +24,16 @@ var chatSocket = function (io) {
         // Initial
         console.log("User connected: ".concat(socket.id));
         // On connection to user
-        socket.emit('message', (0, messages_js_1.buildMsg)('Admin', 'Welcome to the Sphere Chat! 💬'));
+        socket.emit('message', buildMsg('Admin', 'Welcome to the Sphere Chat! 💬'));
         socket.on('enterRoom', function (_a) {
             // Leave previous room
             var _b;
             var name = _a.name, room = _a.room;
-            user = new users_js_1.User(socket.id, name, room, userState);
+            user = new User(socket.id, name, room, userState);
             var prevRoom = (_b = user.getUser()) === null || _b === void 0 ? void 0 : _b.room;
             if (prevRoom) {
                 socket.leave(prevRoom);
-                io.to(prevRoom).emit('message', (0, messages_js_1.buildMsg)('Admin', "".concat(name, " has left the chat")));
+                io.to(prevRoom).emit('message', buildMsg('Admin', "".concat(name, " has left the chat")));
             }
             user.activateUser();
             // Cannot updated previous room users list until after the state is updated
@@ -48,9 +45,9 @@ var chatSocket = function (io) {
             // Join new room
             socket.join(user.room);
             // To user who joined
-            socket.emit('message', (0, messages_js_1.buildMsg)('Admin', "Welcome to the ".concat(user.room, " room, ").concat(user.name, "!")));
+            socket.emit('message', buildMsg('Admin', "Welcome to the ".concat(user.room, " room, ").concat(user.name, "!")));
             // To all users in room
-            socket.broadcast.to(user.room).emit('message', (0, messages_js_1.buildMsg)('Admin', "".concat(user.name, " has joined the chat room")));
+            socket.broadcast.to(user.room).emit('message', buildMsg('Admin', "".concat(user.name, " has joined the chat room")));
             // Update user list for room
             io.to(user.room).emit('userList', {
                 users: user.getUsersInRoom(user.room),
@@ -63,7 +60,7 @@ var chatSocket = function (io) {
         // On user disconnect
         socket.on('disconnect', function () {
             if (user) {
-                io.to(user.room).emit('message', (0, messages_js_1.buildMsg)('Admin', "".concat(user.name, " has left the room")));
+                io.to(user.room).emit('message', buildMsg('Admin', "".concat(user.name, " has left the room")));
                 io.to(user.room).emit('userList', {
                     users: user.getUsersInRoom(user.room),
                 });
@@ -79,7 +76,7 @@ var chatSocket = function (io) {
             var name = _a.name, text = _a.text;
             var room = (_b = user.getUser()) === null || _b === void 0 ? void 0 : _b.room;
             if (room) {
-                io.to(room).emit('message', (0, messages_js_1.buildMsg)(name, text));
+                io.to(room).emit('message', buildMsg(name, text));
             }
         });
         // On activity detected
@@ -92,4 +89,4 @@ var chatSocket = function (io) {
         });
     });
 };
-exports.chatSocket = chatSocket;
+export { chatSocket };

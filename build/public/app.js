@@ -1,6 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.setupEventListener = exports.sendMessage = void 0;
 var socket = io('ws://localhost:3500');
 // LEGACY MOCK UI, DO NOT USE
 var msgInput = document.querySelector('#message');
@@ -10,7 +7,7 @@ var activity = document.querySelector('#activity');
 var usersList = document.querySelector('#user-list');
 var roomList = document.querySelector('#room-list');
 var chatDisplay = document.querySelector('#chat-display');
-function sendMessage(e) {
+export function sendMessage(e) {
     e.preventDefault();
     if (msgInput.value && nameInput.value && chatRoom.value) {
         socket.emit('message', {
@@ -22,7 +19,6 @@ function sendMessage(e) {
     ;
     msgInput.focus();
 }
-exports.sendMessage = sendMessage;
 function enterRoom(e) {
     e.preventDefault();
     if (nameInput.value && chatRoom.value) {
@@ -33,11 +29,10 @@ function enterRoom(e) {
     }
     ;
 }
-function setupEventListener() {
+export function setupEventListener() {
     document.querySelector('.form-msg').addEventListener('submit', sendMessage);
     document.querySelector('.form-join').addEventListener('submit', enterRoom);
 }
-exports.setupEventListener = setupEventListener;
 // Listen for actvity
 msgInput.addEventListener('keypress', function () {
     socket.emit('activity', nameInput.value);

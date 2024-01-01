@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "start": "node ./build/index.js",
+    "dev": "nodemon ./build/index.js",
     "test": "node --experimental-vm-modules ./node_modules/.bin/jest"
   },
   "keywords": [],
