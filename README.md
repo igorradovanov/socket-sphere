@@ -1,6 +1,8 @@
 [![CodeQL](https://github.com/igorradovanov/socket-sphere/actions/workflows/codeql.yml/badge.svg)](https://github.com/igorradovanov/socket-sphere/actions/workflows/codeql.yml)
 
-# 🚀 Real-Time Chat Application 🚀
+# 🚀 Socket Sphere 🚀
+
+## Real-Time Chat Application
 
 This is a real-time chat application built with Express.js and Socket.IO.
 
