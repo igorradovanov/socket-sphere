@@ -2,11 +2,11 @@
   "name": "server",
   "version": "1.0.0",
   "description": "Server for the Socket Sphere",
-  "main": "index.js",
+  "main": "./server/index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "start": "node ./server/index.js",
+    "dev": "nodemon ./server/index.js",
     "test": "node --experimental-vm-modules ./node_modules/.bin/jest"
   },
   "keywords": [],
